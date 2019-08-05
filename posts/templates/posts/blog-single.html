@@ -1,0 +1,94 @@
+{% extends './layout.html' %}
+{% load static %}
+
+{% block content %}
+    {% include './banner.html' %}
+
+    <section class="site-section py-lg">
+        <div class="container">
+
+            <div class="row blog-entries element-animate">
+
+                <div class="col-md-12 col-lg-8 main-content">
+                    <img src="{{ post.post_image.url }}" alt="Image" class="img-fluid mb-5">
+                    <div class="post-meta">
+                        <span class="author mr-2"><img src="{% static 'posts/images/person_1.jpg' %}" alt="Colorlib"
+                                                       class="mr-2"> Colorlib</span>&bullet;
+                        <span class="mr-2">March 15, 2018 </span> &bullet;
+                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                    </div>
+                    <h1 class="mb-4">{{ post.title }}</h1>
+                    {% for category in post.category.all %}
+                        <a class="category mb-5" href="#">{{ category }}</a>
+                    {% endfor %}
+
+                    <div class="post-content-body">
+                        <p>{{ post.description }}</p>
+                    </div>
+
+
+                    <div class="pt-5">
+                        <p>Categories:
+                            {% for category in post.category.all %}
+                                <a href="#">{{ category }}</a>
+                            {% endfor %}
+                        </p>
+                    </div>
+
+
+                    <div class="pt-5">
+                        <h3 class="mb-5">6 Comments</h3>
+                        <ul class="comment-list">
+                            {% for comment in post.comments_set.all %}
+                                <li class="comment">
+                                    <div class="vcard">
+                                        <img src="{% static 'posts/images/person_1.jpg' %}" alt="Image placeholder">
+                                    </div>
+                                    <div class="comment-body">
+                                        <h3>Jean Doe</h3>
+                                        <div class="meta">January 9, 2018 at 2:21pm</div>
+                                        <p>{{ comment }}</p>
+                                    </div>
+                                </li>
+                            {% endfor %}
+
+
+                        </ul>
+                        <!-- END comment-list -->
+                        <div class="comment-form-wrap pt-5">
+                            <h3 class="mb-5">Leave a comment</h3>
+                            <form method="POST" action="{% url 'posts:comment' post.id %}" class="p-5 bg-light">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    <input type="email" class="form-control" id="email">
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="message">Message</label>
+                                    <textarea name="text" id="text" cols="30" rows="10"
+                                              class="form-control"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Post Comment" class="btn btn-primary">
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- END main-content -->
+
+
+                <!-- END sidebar -->
+
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}

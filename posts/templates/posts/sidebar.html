@@ -1,0 +1,22 @@
+<div class="col-md-12 col-lg-4 sidebar">
+
+
+    <div class="sidebar-box">
+        <h3 class="heading">Categories</h3>
+        <ul class="categories">
+            {% for category in categories %}
+                <li><a href="{% url 'posts:index' %}?category={{category.id}}">{{ category }} <span>(12)</span></a></li>
+            {% endfor %}
+
+        </ul>
+    </div>
+    <!-- END sidebar-box -->
+
+    {#    <div class="sidebar-box">#}
+    {#        <h3 class="heading">Tags</h3>#}
+    {#        <ul class="tags">#}
+    {##}
+    {##}
+    {#        </ul>#}
+    {#    </div>#}
+</div>
