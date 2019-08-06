@@ -10,9 +10,7 @@ services:
        MYSQL_USER: 'root'
        MYSQL_PASSWORD: 'root'
        MYSQL_ROOT_PASSWORD: 'root'
-#    volumes:
-#      - dbdata:/var/lib/mysql/
-#      - ./mysql/my.cnf:/etc/mysql/my.cnf
+
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
@@ -22,7 +20,3 @@ services:
       - "8000:8000"
     depends_on:
       - db
-#Volumes
-#volumes:
-#  dbdata:
-#    driver: local
