@@ -12,3 +12,6 @@ before_script: # => 6
   - mysql -e 'create database test;' -u root
 script: # => 7
   - python manage.py test
+  - pylint --load-plugins pylint_django blog/
+  - pylint --load-plugins pylint_django polls/
+  - pylint --load-plugins pylint_django posts/
