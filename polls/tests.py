@@ -1,3 +1,7 @@
+"""
+This is application testing module
+"""
+
 import datetime
 
 from django.test import TestCase
@@ -7,6 +11,9 @@ from .models import Question, Choice
 
 
 class QuestionModelTests(TestCase):
+    """
+     Question Model Tests.
+     """
 
     def test_was_published_recently_with_future_question(self):
         """
@@ -47,6 +54,10 @@ def create_question(question_text, days):
 
 
 class QuestionIndexViewTests(TestCase):
+    """
+     Question Model Tests for index.
+    """
+
     def test_no_questions(self):
         """
         If no questions exist, an appropriate message is displayed.
@@ -105,6 +116,10 @@ class QuestionIndexViewTests(TestCase):
 
 
 class QuestionDetailViewTests(TestCase):
+    """
+     Question Detail view Tests.
+     """
+
     def test_future_question(self):
         """
         The detail view of a question with a pub_date in the future
@@ -127,6 +142,10 @@ class QuestionDetailViewTests(TestCase):
 
 
 class Vote(TestCase):
+    """
+     Vote view Tests.
+     """
+
     def test_not_question_exists(self):
         """
         The detail view of a question with a pub_date in the future
@@ -143,12 +162,15 @@ class Vote(TestCase):
         """
         question = create_question(question_text='Future question.', days=-5)
         url = reverse('polls:vote', args=(question.id,))
-        response = self.client.post(url, {'choice': 1})
+        self.client.post(url, {'choice': 1})
         self.assertRaises(Choice.DoesNotExist)
 
     def test_question_exists(self):
+        """
+        test_question_exists
+        """
         question = create_question(question_text='Future question.', days=-5)
-        choice1 = Choice.objects.create(question_id=question.id, choice_text='text1')
+        Choice.objects.create(question_id=question.id, choice_text='text1')
         choice2 = Choice.objects.create(question_id=question.id, choice_text='text2')
 
         url = reverse('polls:vote', args=(question.id,))
@@ -156,5 +178,4 @@ class Vote(TestCase):
         # choice_after_update = Choice.objects.filter(id=choice2.id)
         # print(choice_after_update.votes,'dasdasd asd asdas')
         # self.assertEqual(choice_after_update.votes, 1)
-        self.assertRedirects(response, reverse('polls:results', args=(question.id,)), status_code=302,
-                             target_status_code=200)
+        self.assertRedirects(response, reverse('polls:results', args=(question.id,)), 302, 200)

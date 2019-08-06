@@ -1,10 +1,11 @@
+"""Application views"""
+
 from django.shortcuts import render, get_object_or_404, reverse
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.utils import timezone
+from django.views import generic
 
 from .models import Question, Choice
-from django.template import loader
-from django.views import generic
 
 
 # #for index page
@@ -49,7 +50,8 @@ from django.views import generic
 #     def get_queryset(self):
 #       return Question.objects.order_by('-pub_date')[:5]
 
-class IndexView(generic.ListView):
+class IndexView(generic.ListView):  # pylint: disable=too-many-ancestors
+    """Return Index template"""
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
 
@@ -58,7 +60,9 @@ class IndexView(generic.ListView):
         return Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
 
 
-class DetailView(generic.DetailView):
+class DetailView(generic.DetailView):  # pylint: disable=too-many-ancestors
+    """Return question detail"""
+
     model = Question
     template_name = 'polls/detail.html'
 
@@ -69,13 +73,17 @@ class DetailView(generic.DetailView):
         return Question.objects.filter(pub_date__lte=timezone.now())
 
 
-class ResultsView(generic.DetailView):
+class ResultsView(generic.DetailView):  # pylint: disable=too-many-ancestors
+    """Return Index results"""
+
     model = Question
     template_name = 'polls/results.html'
 
 
 # update choice table and increment vote
 def vote(request, question_id):
+    """Increment vote of question"""
+
     question = get_object_or_404(Question, pk=question_id)
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
