@@ -1,11 +1,15 @@
+"""
+Comment
+"""
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
-from django.views import generic
+# from django.views import generic
 from ..models import Comments, Post
 
 
 def comment(request, post_id):
+    """Comment handler"""
     try:
         post = get_object_or_404(Post, pk=post_id)
     except (KeyError, Post.DoesNotExist):
