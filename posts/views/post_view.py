@@ -18,7 +18,7 @@ class IndexView(generic.ListView):  # pylint: disable=too-many-ancestors
         """get_queryset"""
         # print(self.request.user.is_authenticated, 'user')
         category = self.request.GET.get('category', None)
-        data = []
+        # data = []
         if category is None:
             data = Post.objects.all()
         else:
