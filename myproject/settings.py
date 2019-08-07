@@ -87,7 +87,7 @@ if 'TRAVIS' in os.environ:
             'USER': 'root',
             'PASSWORD': '',
             'HOST': 'localhost',
-            'PORT': '3308',
+            'PORT': '3306',
         }
     }
 else:
