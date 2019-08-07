@@ -23,6 +23,6 @@ before_install:
 #before_script: # => 6
 #  - mysql -e 'create database test;' -u root
 script: # => 7
-  - docker exec -t dockerdajango_web_1 python manage.py test
-  - docker exec -t dockerdajango_web_1 pylint --load-plugins pylint_django polls/
-  - docker exec -t dockerdajango_web_1 pylint --load-plugins pylint_django posts/
+  - docker exec -t blogdockerdjango_web_1 python manage.py test
+  - docker exec -t blogdockerdjango_web_1 pylint --load-plugins pylint_django polls/
+  - docker exec -t blogdockerdjango_web_1 pylint --load-plugins pylint_django posts/
